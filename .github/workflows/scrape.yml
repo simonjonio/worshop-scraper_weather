@@ -1,0 +1,27 @@
+name: Automated Weather Scrape
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Elke dag om 08:00 UTC (10:00 Belgische tijd)
+  workflow_dispatch:      # Dit zorgt voor de "test-knop"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install libraries
+        run: pip install requests beautifulsoup4 pandas supabase
+
+      - name: Run de scraper
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+        run: python scrape.py
