@@ -14,7 +14,7 @@ SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 scrape_time = datetime.now().isoformat()
 
 def run_pipeline():
-    url = "https://www.timeanddate.com/weather/belgium/brussels/ext"
+    url = "https://www.timeanddate.com/weather/belgium/brussels/ext?unit=c"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
     }
